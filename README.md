@@ -97,3 +97,17 @@ Deletes all in-memory data associated with the user.
 curl -X DELETE http://localhost:3000/destroy \
          -H "Authorization: Bearer 05159422a2aeaaefa68fd756f11196a4e13757ed6ef4b55ce007736bc65fff60"
 ```
+
+### Docker Usage
+
+To run the Vector Indexing Service using Docker, simply pull the image and run it.
+
+```shell
+# Pull the Docker image
+docker pull public.ecr.aws/o7v8m7v2/indexnetwork/dag-jose-vector-search:latest-dev
+
+# Run the Docker container
+docker run -p 3000:3000 public.ecr.aws/o7v8m7v2/indexnetwork/dag-jose-vector-search:latest-dev`
+```
+
+This command will start the service, making it accessible at `http://localhost:3000`
