@@ -32,5 +32,5 @@ export const getRandomDIDSession = async () => {
     const cacao = Cacao.fromSiweMessage(siweMessage);
     const did = await createDIDCacao(didKey, cacao);
     const newSession = new DIDSession({ cacao, keySeed, did });
-    return newSession.serialize()
+    return newSession
 };

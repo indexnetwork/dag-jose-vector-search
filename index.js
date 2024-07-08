@@ -15,7 +15,7 @@ const indexes = []; // In-memory storage for indexes
 const getIndexForDID = async (did) => {
   let indexData = indexes.find((index) => index.did === did);
   if (!indexData) {
-    const vectors = new HierarchicalNSW("cosine", 1024);
+    const vectors = new HierarchicalNSW("cosine", 1536);
     vectors.initIndex(100000);
 
     indexData = { did, vectors, documents: [] };
@@ -30,12 +30,11 @@ app.post("/index", authCheckMiddleware, async (req, res) => {
   try {
     const indexData = await getIndexForDID(req.did);
     const decoded = await req.session.did.decryptDagJWE(req.body.jwe);
-
     indexData.documents.push(decoded.document);
     indexData.vectors.addPoint(decoded.vector, indexData.documents.length - 1);
-
     res.json(indexData);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Error storing document" });
   }
 });
@@ -69,8 +68,8 @@ app.delete("/destroy", authCheckMiddleware, async (req, res) => {
 
 app.get("/randomuser", async (req, res) => {
   try {
-    const token = await getRandomDIDSession();
-    res.json({ token });
+    const session = await getRandomDIDSession();
+    res.json({ token: session.serialize()  });
   } catch (error) {
     res.status(500).json({ error: "Error generating random user" });
   }
