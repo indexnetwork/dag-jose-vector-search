@@ -1,4 +1,4 @@
-# dag-jose-vector-searc
+# dag-jose-vector-search
 
 This project provides a web service for managing documents & vector indexes encoded in DAG-JOSE associated with decentralized identifiers (DIDs). It allows users to store, search, and manage documents and their corresponding vectors using hierarchical navigable small world (HNSW) graphs for efficient nearest neighbor search.
 
