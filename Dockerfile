@@ -7,7 +7,7 @@ RUN apk add --no-cache make gcc g++ python3
 WORKDIR /usr/src/app
 
 # Copy package.json and yarn.lock
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 
 # Install node modules
 RUN npm install
